@@ -1,46 +1,61 @@
+'use client'
 import React from 'react'
+import Products from '@/lib/products'
+import {useState,useEffect} from 'react'
 
-import { client } from '@/sanity/lib/client';
 import Image from 'next/image';
-const Products = async () => {
-    const query = `
-      *[_type == "products"][0..4]{
-  _id,
-    price,
-    title,
-    "slug":slug.current,
-    "categoryName": category->title,
-    "ImageUrl":image.asset->url
-}
+import {motion} from 'framer-motion'
 
-    `;
-    const products = await client.fetch(query);
-    console.log(products)
-    return products;
+const Featured = () => {
+ 
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const fetchedProducts = await Products();
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    };
+
+    getProducts();
+  }, []);
+
+   
+    const convars = {
+      initial :{
+        scale:1
+      },
+      animate : {
+        scale : 0.9,
+        transition:{
+          duration : 0.2
+        }
+        
     
-  };
-const Featured = async() => {
-    const data = await Products();
+      }
+    }
   return (
     // <div className='flex w-full border-2 bp'>Featured</div>
     <div className="featured-products py-8">
       <h2 className="text-2xl font-bold text-center mb-6">Featured Products</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {data.map((product:any) => (
-          <div key={product._id} className="product-card border border-gray-300 rounded-lg p-4 shadow-lg">
-            <img src={product.imageUrl} alt={product.title} className="product-image w-full h-48 object-cover mb-4 rounded" />
-            <h3 className="product-title text-lg font-semibold">{product.title}</h3>
-            <p className="product-description text-gray-600">{product.description}</p>
-            <p className="product-category text-gray-500">Category: {product.categoryName}</p>
+        {products.map((product:any) => (
+          <motion.div variants={convars} initial="initial" whileHover="animate" key={product._id} className="product-card border hover:bg-gray-100 border-gray-300 rounded-lg p-4 shadow-lg flex flex-col justify-center">
+            <div className=''><Image src={product.ImageUrl} alt={product.title} width={300} height={300} className="product-image w-full h-48 object-contain mb-4 rounded" ></Image></div>
+            <h3 className="product-title text-lg font-bold text-center">{product.title}</h3>
+            <p className="product-price text-blue-600 text-lg text-center">${product.price}</p>
+            <p className="product-description text-gray-400 text-sm text-center">{product.Description}</p>
+            <p className="product-category text-gray-500 text-center">Category: {product.categoryName}</p>
+            <div className=' flex w-full p-2  justify-center items-center '>
+              <button className='p-2 bg-blue-500 text-white  rounded-lg hover:bg-blue-700'>Add to Cart</button>
+            </div>
             
-              <Image
-                src={product.categoryImage}
-                alt={`${product.categoryName} Image`}
-                className="category-image w-16 h-16 object-cover rounded mt-2"
-                width={100} height={100}
-              />
             
-          </div>
+            
+          </motion.div>
         ))}
       </div>
     </div>
