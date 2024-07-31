@@ -48,7 +48,7 @@ const Navbar = () => {
 
 
   return (
-    <nav className=" p-4">
+    <nav className=" p-4 border-2 shadow-xl rounded-xl">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-teal-500 text-2xl">MyLogo</div>
         <div className="hidden md:flex space-x-6">
