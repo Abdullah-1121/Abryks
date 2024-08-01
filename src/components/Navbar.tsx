@@ -55,7 +55,7 @@ const Navbar = () => {
           <Link href='' className='text-black'>Mens</Link>
           <Link href='' className='text-black'>Women</Link>
           <Link href='' className='text-black'></Link>
-          <Link href=''><FaShoppingCart className='text-3xl text-gray-600'></FaShoppingCart></Link>
+          <Link href='/cart'><FaShoppingCart className='text-3xl text-gray-600'></FaShoppingCart></Link>
         </div>
         <div className="md:hidden flex items-center">
         <FaShoppingCart className='text-3xl text-gray-600 mx-2'></FaShoppingCart>

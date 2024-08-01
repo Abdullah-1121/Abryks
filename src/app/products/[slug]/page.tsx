@@ -3,6 +3,8 @@ import React from 'react'
 
 import {client} from '@/sanity/lib/client'
 import { FaTruck , FaStar} from 'react-icons/fa';
+import { useDispatch, UseDispatch } from 'react-redux';
+import {addProduct} from '@/redux/CartSlice'
 
 import Image from 'next/image'
 
@@ -23,6 +25,10 @@ export default async function ProductPage({params}:{
      params:{slug:string}
 }){
     const data = await getData(params.slug);
+    let dispatch = useDispatch()
+    const addToCart = (product:any)=>{
+      dispatch(addProduct(product))
+    }
   
       
     console.log(data);
@@ -49,7 +55,7 @@ export default async function ProductPage({params}:{
           <div className='flex mb-2'>
             <FaTruck></FaTruck><span className='mx-2 text-sm '>3-5 days shipping</span>
           </div>
-          <div className="flex items-center gap-4 mb-6">
+          {/* <div className="flex items-center gap-4 mb-6">
             <button 
               
               className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-200"
@@ -64,10 +70,11 @@ export default async function ProductPage({params}:{
               +
             </button>
             
-          </div>
+          </div> */}
           <button 
            
             className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            onClick={addToCart}
           >
             Add to Cart
           </button>
