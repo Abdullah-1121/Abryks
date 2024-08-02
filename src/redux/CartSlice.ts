@@ -1,75 +1,226 @@
-import { createSlice , PayloadAction } from "@reduxjs/toolkit";
- interface cartitem {
-    name:string,
-    price:number,
-    id:string,
-    quantity:number
- }
- interface state {
-    items:cartitem[],
-    totalAmount:number,
-    totalQuantity:number
- }
- let items :any[]=[]
- const initialState:state={
-    items,
-    totalAmount:0,
-    totalQuantity:0
- }
- const cart = createSlice({
-    name:'cart',
-    initialState,
-    reducers:{
-        addProduct : (state,action:PayloadAction<cartitem>)=>{
-            let newItem = action.payload;
-            let existingItem = state.items.find(item => item.id == newItem.id)
-            if(existingItem){
-                existingItem.quantity+=newItem.quantity;
-                existingItem.price+=newItem.price*newItem.quantity
-                
-            }else{
-                state.items.push(newItem)
+import { createSlice } from "@reduxjs/toolkit";
+let cartItems:any[]=[];
+
+const roundToTwoDecimals = (num:number) => Math.round(num * 100) / 100;
+
+const initialState = {
+    cartItems,
+    totalAmount: 0,
+    totalQuantity: 0,
+}
+
+const cart = createSlice({
+    name: "cart",
+    initialState :initialState,
+    reducers: {
+        addToCart: (state, action) => {
+         
+            const product = action.payload.products;
+                                //Deubugging.....
+            // Checking the syntax and type of the product
+            console.log(product);
+            console.log(typeof product);
+            console.log(product._id)
+            // console.log('Product ID:', JSON.stringify(product.id));
+
+            // Check existing product in cart
+            const existingProd = state.cartItems.find(item => item.id === product.id);
+            console.log('Existing Product:', existingProd);
+
+            if (existingProd) {
+                existingProd.quantity += 1;
+                // console.log(`Existing product updated:`, existingProd);
+            } else {
+                state.cartItems.push({ ...product, quantity: 1 });
+                // console.log('Pushed new product:', { ...product, quantity: 1 });
+                // console.log('Cart items after push:', state.cartItems);
             }
-            state.totalQuantity += newItem.quantity;
-      state.totalAmount += newItem.price * newItem.quantity;
+
+            state.totalQuantity += 1;
+            state.totalAmount =roundToTwoDecimals(state.totalAmount+product.price) ;
+            console.log('Total Quantity:', state.totalQuantity);
+            console.log('Total Amount:', state.totalAmount);
         },
         removeProduct:(state,action)=>{
-            const id = action.payload;
-            const existingItem = state.items.find(item => item.id === id.id);
+            let productId = action.payload;
+            // console.log(`productId of the product  to be removed is : ${productId}`);
+            let productIndex = state.cartItems.findIndex((item)=>item.id==productId);
+            // console.log(productIndex)
+            if(productIndex!==-1){
+                let product = state.cartItems[productIndex];
+                // console.log(`the product object to be removed is : ${JSON.stringify(product)}`);
+                console.log(`total Quantity = ${state.totalQuantity} product qunatity =${product.quantity}`)
+                state.totalQuantity-=product.quantity;
+                
+                // console.log(state.totalQuantity);
+                // console.log(product.qunatity)
+                // state.totalAmount-=product.price*product.quantity;
+                let deductedPrice = product.price*product.quantity;
+                console.log(`deducted price = ${deductedPrice}`);
+                console.log(`${state.totalAmount}= ${state.totalAmount}-${deductedPrice}`)
+                state.totalAmount=roundToTwoDecimals(state.totalAmount-deductedPrice);
+                
+                console.log(state.totalAmount)
+
+                
+                 state.cartItems.splice(productIndex,1);
+                // console.log(del)
+            }
+            
       
-            if (existingItem) {
-              // Update the total quantity and amount of the cart
-              state.totalQuantity -= existingItem.quantity;
-              state.totalAmount -= existingItem.price * existingItem.quantity;
-              // Remove the item from the cart
-              state.items = state.items.filter(item => item.id !== id);
+
+        },
+        Addone:(state,action)=>{
+           
+            let productID = action.payload;
+            console.log(`action payload : ${JSON.stringify(productID)}`);
+            console.log(typeof productID);
+            console.log(`quantity of product ${productID}`);
+            let productIndex = state.cartItems.findIndex((item)=>item.id==productID);
+            if(productIndex!==-1){
+                let product = state.cartItems[productIndex];
+                state.totalQuantity+=1;
+                product.quantity+=1;
+                
+                state.totalAmount=roundToTwoDecimals(state.totalAmount+product.price);
+            }
+            
+            
+                
+                
+            
+            
+            
+
+
+
+        },
+        removeOne:(state,action)=>{
+            let productID = action.payload;
+            console.log(`action payload : ${JSON.stringify(productID)}`);
+            console.log(typeof productID);
+            console.log(`quantity of product ${productID}`);
+            let productIndex = state.cartItems.findIndex((item)=>item.id==productID);
+            if(productIndex!==-1){
+                let product = state.cartItems[productIndex];
+                if(product.quantity==1){
+                    state.cartItems.splice(productIndex,1);
+                    
+                    state.totalQuantity-=1;
+                    if(state.totalAmount<=0){
+                        state.totalAmount=0;
+                    }else{
+                        state.totalAmount=roundToTwoDecimals(state.totalAmount-product.price);
+
+                    }
+
+                }else{
+                    state.totalQuantity-=1;
+                    product.quantity-=1;
+                    state.totalAmount=roundToTwoDecimals(state.totalAmount-product.price);
+
+                }
+                
+            }
+
+
+
+
+        }
+
+        
+       
+            }
+        })
+        export const { addToCart,  removeProduct, Addone, removeOne } = cart.actions;
+        export default cart.reducer;
+// import { createSlice , PayloadAction } from "@reduxjs/toolkit";
+// //  interface cartitem {
+// //     name:string,
+// //     price:number,
+// //     id:string,
+// //     quantity:number
+// //  }
+// //  interface state {
+// //     items:cartitem[],
+// //     totalAmount:number,
+// //     totalQuantity:number
+// //  }
+// let items : any[]=[]
+ 
+//  const initialState={
+//     items,
+//     totalAmount:0,
+//     totalQuantity:0
+//  }
+//  const cart = createSlice({
+//     name:'cart',
+//     initialState:initialState,
+//     reducers:{
+//         addProduct : (state,action)=>{
+//             let newItem = action.payload;
+//             let existingItem = state.items.find(item => item.id == newItem.id)
+//             if(existingItem){
+//                 existingItem.quantity+=newItem.quantity;
+//                 existingItem.price+=newItem.price*newItem.quantity
+                
+//             }else{
+//                 state.items.push(newItem)
+//             }
+//             state.totalQuantity += newItem.quantity;
+//       state.totalAmount += newItem.price * newItem.quantity;
+//         },
+//         removeProduct:(state,action)=>{
+//             const id = action.payload;
+//             const existingItem = state.items.find(item => item.id === id.id);
+      
+//             if (existingItem) {
+//               // Update the total quantity and amount of the cart
+//               state.totalQuantity -= existingItem.quantity;
+//               state.totalAmount -= existingItem.price * existingItem.quantity;
+//               // Remove the item from the cart
+//               state.items = state.items.filter(item => item.id !== id);
       
             
-            }
-        },
-        addOne:(state,action:PayloadAction<cartitem>)=>{
-            const prod = action.payload;
-            const existingItem = state.items.find(item => item.id === prod.id);
-            if(existingItem){
-                existingItem.quantity++;
-                existingItem.price+=prod.price;
-                state.totalQuantity++
-                state.totalAmount += prod.price;
-            }
+//             }
+//         },
+//         addOne:(state,action:PayloadAction<string>)=>{
+//             // const prod = action.payload;
+//             // const existingItem = state.items.find(item => item.id === prod.id);
+//             // if(existingItem){
+//             //     existingItem.quantity++;
+//             //     existingItem.price+=prod.price;
+//             //     state.totalQuantity++
+//             //     state.totalAmount += prod.price;
+//             // }
+//             const id = action.payload;
+//             const existingItem = state.items.find(item => item.id === id);
+//             if (existingItem) {
+//               existingItem.quantity += 1;
+//               state.totalQuantity += 1;
+//               state.totalAmount += existingItem.price;
+//             }
 
-            },
-            removeOne:(state,action:PayloadAction<cartitem>)=>{
-                const prod = action.payload;
-            const existingItem = state.items.find(item => item.id === prod.id);
-            if(existingItem){
-                existingItem.quantity--;
-                state.totalQuantity--
-                state.totalAmount -=prod.price;
-            }
+//             },
+//             removeOne:(state,action:PayloadAction<string>)=>{
+//             //     const prod = action.payload;
+//             // const existingItem = state.items.find(item => item.id === prod.id);
+//             // if(existingItem){
+//             //     existingItem.quantity--;
+//             //     state.totalQuantity--
+//             //     state.totalAmount -=prod.price;
+//             // }
+//             const id = action.payload;
+//             const existingItem = state.items.find(item => item.id === id);
+//             if (existingItem && existingItem.quantity > 0) {
+//               existingItem.quantity -= 1;
+//               state.totalQuantity -= 1;
+//               state.totalAmount -= existingItem.price;
 
-            }
-        }
+//             }
+//         }
+//     }
     
- })
- export const { addProduct , removeProduct , addOne , removeOne} = cart.actions;
-export default cart.reducer;
+//  })
+//  export const { addProduct , removeProduct , addOne , removeOne} = cart.actions;
+// export default cart.reducer;

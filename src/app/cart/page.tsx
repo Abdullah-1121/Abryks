@@ -1,10 +1,12 @@
+'use client'
 import React from 'react'
 import CartProvider from '@/redux/CartProvider'
+import Shoppingcart from '@/components/cart'
 
 const cart = () => {
   return (
     <CartProvider>
-        <div>cart</div>
+        <Shoppingcart></Shoppingcart>
     </CartProvider>
   )
 }
