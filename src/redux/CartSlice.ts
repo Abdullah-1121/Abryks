@@ -18,19 +18,24 @@ const cart = createSlice({
             const product = action.payload.products;
                                 //Deubugging.....
             // Checking the syntax and type of the product
-            console.log(product);
-            console.log(typeof product);
-            console.log(product._id)
+            // console.log(product);
+            // console.log(typeof product);
+            // console.log(product._id)
             // console.log('Product ID:', JSON.stringify(product.id));
 
             // Check existing product in cart
-            const existingProd = state.cartItems.find(item => item.id === product.id);
-            console.log('Existing Product:', existingProd);
+            const existingProd = state.cartItems.find(item => item._id === product._id);
+//             console.log('state.Cartitems' )
+//             console.log(state.cartItems)
+//             console.log('Existing Product:', existingProd);
+//             console.log('Product ID:', existingProd?._id);
+// console.log('Product Quantity:', existingProd?.quantity);
 
             if (existingProd) {
                 existingProd.quantity += 1;
                 // console.log(`Existing product updated:`, existingProd);
             } else {
+                // console.log('new Product')
                 state.cartItems.push({ ...product, quantity: 1 });
                 // console.log('Pushed new product:', { ...product, quantity: 1 });
                 // console.log('Cart items after push:', state.cartItems);
@@ -38,29 +43,33 @@ const cart = createSlice({
 
             state.totalQuantity += 1;
             state.totalAmount =roundToTwoDecimals(state.totalAmount+product.price) ;
-            console.log('Total Quantity:', state.totalQuantity);
-            console.log('Total Amount:', state.totalAmount);
+            // console.log('Total Quantity:', state.totalQuantity);
+            // console.log('Total Amount:', state.totalAmount);
         },
         removeProduct:(state,action)=>{
-            let productId = action.payload;
-            // console.log(`productId of the product  to be removed is : ${productId}`);
-            let productIndex = state.cartItems.findIndex((item)=>item.id==productId);
+            let productId = action.payload._id;
+
+            // console.log(productId)
+            let productIndex = state.cartItems.findIndex((item)=>item._id==productId);
             // console.log(productIndex)
             if(productIndex!==-1){
                 let product = state.cartItems[productIndex];
-                // console.log(`the product object to be removed is : ${JSON.stringify(product)}`);
-                console.log(`total Quantity = ${state.totalQuantity} product qunatity =${product.quantity}`)
+                // console.log('Prodct to be removed is ' )
+                // console.log(product.quantity)
+               
+                // console.log(`total Quantity = ${state.totalQuantity} product qunatity =${product.quantity}`)
                 state.totalQuantity-=product.quantity;
                 
                 // console.log(state.totalQuantity);
-                // console.log(product.qunatity)
-                // state.totalAmount-=product.price*product.quantity;
+                // console.log(product.quantity)
+                // // state.totalAmount-=product.price*product.quantity;
+                
                 let deductedPrice = product.price*product.quantity;
-                console.log(`deducted price = ${deductedPrice}`);
-                console.log(`${state.totalAmount}= ${state.totalAmount}-${deductedPrice}`)
+                // console.log(`deducted price = ${deductedPrice}`);
+                // console.log(`${state.totalAmount}= ${state.totalAmount}-${deductedPrice}`)
                 state.totalAmount=roundToTwoDecimals(state.totalAmount-deductedPrice);
                 
-                console.log(state.totalAmount)
+                // console.log(state.totalAmount)
 
                 
                  state.cartItems.splice(productIndex,1);
@@ -72,11 +81,12 @@ const cart = createSlice({
         },
         Addone:(state,action)=>{
            
-            let productID = action.payload;
-            console.log(`action payload : ${JSON.stringify(productID)}`);
-            console.log(typeof productID);
-            console.log(`quantity of product ${productID}`);
-            let productIndex = state.cartItems.findIndex((item)=>item.id==productID);
+            let productID = action.payload._id;
+            // console.log(productID)
+            // console.log(typeof productID);
+        
+            let productIndex = state.cartItems.findIndex((item)=>item._id==productID);
+            // console.log(productIndex)
             if(productIndex!==-1){
                 let product = state.cartItems[productIndex];
                 state.totalQuantity+=1;
@@ -96,13 +106,14 @@ const cart = createSlice({
 
         },
         removeOne:(state,action)=>{
-            let productID = action.payload;
-            console.log(`action payload : ${JSON.stringify(productID)}`);
-            console.log(typeof productID);
-            console.log(`quantity of product ${productID}`);
-            let productIndex = state.cartItems.findIndex((item)=>item.id==productID);
+            let productID = action.payload._id;
+            // console.log(productID)
+           
+            
+            let productIndex = state.cartItems.findIndex((item)=>item._id==productID);
             if(productIndex!==-1){
                 let product = state.cartItems[productIndex];
+                // console.log(product.quantity)
                 if(product.quantity==1){
                     state.cartItems.splice(productIndex,1);
                     

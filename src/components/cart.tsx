@@ -10,11 +10,11 @@ const shoppingcart = () =>{
     const handleRemoveOne = (product:any) => { dispatch(removeOne(product)); }; 
     const handleRemoveFromCart = (product:any) => { dispatch(removeProduct(product)); };
      const handleaddtoCart = (product:any)=>{ dispatch(addToCart(product)); }
-     console.log('i am in cart')
-     console.log('cart' )
-     console.log(cart)
-     console.log('cartitem' )
-     console.log(cart.cartItems)
+    //  console.log('i am in cart')
+    //  console.log('cart' )
+    //  console.log(cart)
+    //  console.log('cartitem' )
+    //  console.log(cart.cartItems)
       
      return (
       <div className="p-4">
