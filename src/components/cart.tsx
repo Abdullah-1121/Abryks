@@ -3,6 +3,7 @@ import React from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import { addToCart , removeProduct , Addone , removeOne} from '@/redux/CartSlice'
 import Image from 'next/image'
+import CheckoutButton from './checkoutbtn'
 const shoppingcart = () =>{
   const cart = useSelector((state:any) => state.cart);
    const dispatch = useDispatch();
@@ -62,6 +63,7 @@ const shoppingcart = () =>{
       <div className="mt-6 p-4 bg-gray-100 rounded-lg shadow-md">
         <p className="text-lg font-semibold">Total Quantity: {cart.totalQuantity}</p>
         <p className="text-lg font-semibold">Total Amount: ${cart.totalAmount.toFixed(2)}</p>
+        <CheckoutButton></CheckoutButton>
       </div>
     </div>
      )
