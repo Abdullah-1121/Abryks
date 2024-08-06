@@ -22,7 +22,7 @@ const shoppingcart = () =>{
      
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {cart.cartItems.map((item: any) => (
-          <div key={item.id} className="bg-white rounded-lg shadow-md p-4">
+          <div key={item._id} className="bg-white rounded-lg shadow-md p-4">
             <div className="">
               <Image
                 src={item.ImageUrl}

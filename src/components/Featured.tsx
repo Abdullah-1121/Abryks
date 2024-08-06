@@ -3,12 +3,16 @@ import React from 'react'
 import Products from '@/lib/products'
 import {useState,useEffect} from 'react'
 import Link from 'next/link'
-
+import { useDispatch, UseDispatch } from 'react-redux'
+import { addToCart } from '@/redux/CartSlice'
 import Image from 'next/image';
 import {motion} from 'framer-motion'
 
 const Featured = () => {
- 
+ const dispatch = useDispatch();
+ const addtoCart = (product:any)=>{
+  dispatch(addToCart(product))
+ }
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -51,7 +55,7 @@ const Featured = () => {
             {/* <p className="product-description text-gray-400 text-sm text-center">{product.Description}</p> */}
             <p className="product-category text-gray-500 text-center">Category: {product.categoryName}</p></Link>
             <div className=' flex w-full p-2  justify-center items-center '>
-              <button className='p-2 bg-blue-500 text-white  rounded-lg hover:bg-blue-700'>Add to Cart</button>
+              <button className='p-2 bg-blue-500 text-white  rounded-lg hover:bg-blue-700' onClick={()=>{addtoCart({product})}}>Add to Cart</button>
             </div>
             
             
