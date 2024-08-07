@@ -17,10 +17,13 @@
     "@sanity/vision": "^3.52.2",
     "@stripe/react-stripe-js": "^2.7.3",
     "@stripe/stripe-js": "^4.1.0",
+    "bcryptjs": "^2.4.3",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.17",
     "mini-svg-data-uri": "^1.4.4",
+    "mongoose": "^8.5.2",
     "next": "^14.2.5",
+    "next-auth": "^5.0.0-beta.20",
     "next-sanity": "^9.4.2",
     "react": "^18",
     "react-dom": "^18",
@@ -31,9 +34,11 @@
     "slick-carousel": "^1.8.1",
     "stripe": "^16.6.0",
     "styled-components": "^6.1.12",
-    "tailwind-merge": "^2.4.0"
+    "tailwind-merge": "^2.4.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
