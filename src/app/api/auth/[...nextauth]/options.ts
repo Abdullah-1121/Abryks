@@ -4,6 +4,9 @@ import { NextAuthOptions } from "next-auth";
 import { dbConnect } from "@/lib/dbconnect";
 import User from "@/models/User";
 import  CredentialsProvider  from "next-auth/providers/credentials";
+import { MongoDBAdapter } from "@auth/mongodb-adapter"
+import clientPromise  from "@/lib/mogoclient";
+
 import bcrypt from "bcryptjs";
 export const authOptions : NextAuthOptions = {
     providers:[
@@ -60,12 +63,14 @@ export const authOptions : NextAuthOptions = {
     }
     
 },
+
 pages:{
     signIn:'/sign-in'
 },
 session:{
     strategy:"jwt"
 },
+
 
 }
 // import CredentialsProvider from "next-auth/providers/credentials";
