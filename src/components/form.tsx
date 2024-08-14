@@ -4,6 +4,8 @@ import {useForm} from 'react-hook-form'
 import FormField from "./Formfield"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FieldSchemas } from "@/schemas/signup"
+import Link from 'next/link'
+import {FaGoogle} from "react-icons/fa"
 function ContactForm(
     
 ){
@@ -32,7 +34,7 @@ function ContactForm(
        
         email:'email',
         password:'password',
-        confirmPassword:"confirmPassword"
+        confirmPassword:"password"
       }
       const fieldwithError = Object.keys(fieldmappings).find(
         (field)=>errors[field]
@@ -44,20 +46,22 @@ function ContactForm(
         });
       }
       reset()
-      alert('We have recieved your message.Thanks')
+      alert('Submitted')
 
         }catch(error){
-            alert('success!')
+            alert('Error submitting form'
+            )
+            console.log(error)
 
 
         }
 
     }
     return(
-        <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" flex flex-col justify-center items-center md:w-1/2 w-3/4 h-[500px] mx-auto  ">
-          <h1 className="md:text-3xl text-xl font-bold mb-4 text-primary-content">
-            Let&apos;s Talk
+        <form onSubmit={handleSubmit(onSubmit)} className=" w-full">
+        <div className=" flex flex-col justify-center items-center md:w-[50%] lg:w-[40%] w-3/4 h-[500px] mx-auto  shadow-xl rounded-xl">
+          <h1 className="md:text-3xl text-xl font-bold mb-4 text-primary-content ">
+            Sign Up
           </h1>
           <FormField
             type="email"
@@ -76,16 +80,20 @@ function ContactForm(
           />
 
           <FormField
-            type="confirmPassword"
+            type="password"
             placeholder="Confirm Password"
             fullname="confirmPassword"
             register={register}
             error={errors.confirmPassword}
             
           />
-           <button type="submit" className="  p-2 md:p-4 m-4 bg-primary-content text-primary-dark rounded-xl font-bold  shadow-xl hover:bg-blue-200  ">
-              Submit
+           <button type="submit" className="  p-2 md:p-4 m-4 md:w-[70%] w-[80%] text-primary-dark rounded-xl  hover:shadow-xl hover:bg-blue-400 bg-blue-600 text-white ">
+              Sign Up
             </button>
+            <p className="mb-4 text-sm">Already have an account? <Link href='/' className="text-blue-600 underline">Log in</Link></p>
+            <div className="bg-white p-2 flex justify-center md:w-[70%] w-[80%] items-center rounded-lg  text-blue-600 border-2 mb-4 border-blue-600 ">
+                     <FaGoogle className="text-blue-600 m-2 "/><p className="text-md font-semibold hover:underline">Continue with Google</p>
+          </div>
           </div>
         </form>
     )

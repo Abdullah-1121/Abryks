@@ -39,8 +39,8 @@ const formField:React.FC<fieldProps>=({
 
 })=>(
     <>
-    <input className='border-2 p-2 md:p-3 m-2  md:w-[60%] w-[80%]  rounded-xl  ' type={type}  placeholder={placeholder} {...register(fullname, { valueAsNumber })} />
-    {error && <span className="error-message text-red-600 text-sm ">{error.message}</span>}
+    <input className='border-2 p-2 md:p-2 m-2  md:w-[70%] w-[80%]  rounded-xl  ' type={type}  placeholder={placeholder} {...register(fullname, { valueAsNumber })} />
+    {error && <span className="error-message text-center text-red-600 text-sm ">{error.message}</span>}
     </>
 )
 export default formField;
