@@ -2,14 +2,15 @@ import { NextRequest , NextResponse } from "next/server";
 import {dbConnect} from '../../../lib/dbconnect'
 import User from '../../../models/User'
 import bcrypt from 'bcryptjs'
-import {listIndexes} from '@/lib/dbremove'
+
 export async function POST(req: NextRequest) {
     const data = await req.json();
-    const { email, password } = data;
+    const { username , email, password } = data;
+    
 
     try {
         await dbConnect();
-         await listIndexes();
+        
 
         // Check if the user already exists
         const existingUser = await User.findOne({ email });
@@ -23,6 +24,7 @@ export async function POST(req: NextRequest) {
 
         // Create a new user
         const newUser = new User({
+            username,
             email,
             password: hashedPassword
         });

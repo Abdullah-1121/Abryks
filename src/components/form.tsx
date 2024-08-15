@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { FieldSchemas } from "@/schemas/signup"
 import Link from 'next/link'
 import {FaGoogle} from "react-icons/fa"
+import signIn from 'next-auth'
 function ContactForm(
     
 ){
@@ -29,9 +30,16 @@ function ContactForm(
         
               });
               const responseData = await response.json();
+              if(responseData.ok){
+                alert('Submitted');
+              }else{
+                alert(responseData.error)
+                console.log(responseData.error)
+              }
       const {errors={}} = responseData;
       const fieldmappings:Record<string,validFieldNames>={
-       
+
+        username : "username",
         email:'email',
         password:'password',
         confirmPassword:"password"
@@ -46,7 +54,7 @@ function ContactForm(
         });
       }
       reset()
-      alert('Submitted')
+     
 
         }catch(error){
             alert('Error submitting form'
@@ -57,12 +65,20 @@ function ContactForm(
         }
 
     }
+   
     return(
         <form onSubmit={handleSubmit(onSubmit)} className=" w-full">
         <div className=" flex flex-col justify-center items-center md:w-[50%] lg:w-[40%] w-3/4 h-[500px] mx-auto  shadow-xl rounded-xl">
           <h1 className="md:text-3xl text-xl font-bold mb-4 text-primary-content ">
             Sign Up
           </h1>
+          <FormField
+            type="username"
+            placeholder="Username"
+            fullname="username"
+            register={register}
+            error={errors.username}
+          />
           <FormField
             type="email"
             placeholder="Email"
@@ -91,7 +107,7 @@ function ContactForm(
               Sign Up
             </button>
             <p className="mb-4 text-sm">Already have an account? <Link href='/' className="text-blue-600 underline">Log in</Link></p>
-            <div className="bg-white p-2 flex justify-center md:w-[70%] w-[80%] items-center rounded-lg  text-blue-600 border-2 mb-4 border-blue-600 ">
+            <div  onClick={() => signIn("google",{callbackUrl:"/"})} className="bg-white p-2 flex justify-center md:w-[70%] w-[80%] items-center rounded-lg  text-blue-600 border-2 mb-4 border-blue-600 ">
                      <FaGoogle className="text-blue-600 m-2 "/><p className="text-md font-semibold hover:underline">Continue with Google</p>
           </div>
           </div>
