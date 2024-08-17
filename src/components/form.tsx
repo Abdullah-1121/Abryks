@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { FieldSchemas } from "@/schemas/signup"
 import Link from 'next/link'
 import {FaGoogle} from "react-icons/fa"
-import signIn from 'next-auth'
+import { useSession, signIn, signOut } from "next-auth/react"
 function ContactForm(
     
 ){

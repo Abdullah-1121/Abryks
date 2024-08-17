@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/footer'
 import CustomProvider from "@/redux/CartProvider";
 import store from "@/redux/store"
+import AuthProvider from '@/components/authProvider'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         
-        <Navbar></Navbar><CustomProvider>{children}</CustomProvider><Footer></Footer></body>
+       <CustomProvider><AuthProvider> <Navbar></Navbar>{children}</AuthProvider></CustomProvider><Footer></Footer></body>
     </html>
   );
 }

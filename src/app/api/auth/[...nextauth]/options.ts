@@ -47,7 +47,34 @@ export const authOptions : NextAuthOptions = {
 
     ],
     callbacks:{
-
+        async signIn({ user, account }) {
+            await dbConnect();
+      
+            if (account && account.provider === 'google') {
+              let existingUser = await User.findOne({ email: user.email });
+              
+      
+              if (!existingUser) {
+                try {
+                  // Create user with default values for optional fields
+                  await User.create({
+                    name: user.name,
+                    email: user.email,
+                    username: user.email!.split('@')[0], // Example username
+                    password: null, // No password needed
+                  });
+                  
+                } catch (error) {
+                  console.error('Error creating user:', error);
+                 
+                }
+               
+              }else{
+                return existingUser
+              }
+            }
+            return true; // Allow sign-in
+          },
         async jwt({ token, user }) {
             if (user) {
               token._id = user._id;

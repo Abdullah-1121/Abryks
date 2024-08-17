@@ -2,11 +2,14 @@
 import Link from 'next/link'
 import { useState } from 'react';
 import {motion , AnimatePresence} from 'framer-motion'
+import { useSession, signIn, signOut } from "next-auth/react";
+
 import { FaFacebook, FaTwitter, FaLinkedin , FaTimes , FaBars , FaInstagram , FaGithub , FaShoppingBag , FaShoppingCart } from 'react-icons/fa';
 
 
 
 const Navbar = () => {
+  const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -52,8 +55,18 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-teal-500 text-2xl">MyLogo</div>
         <div className="hidden md:flex space-x-6">
-          <Link href='' className='text-black'>Mens</Link>
-          <Link href='' className='text-black'>Women</Link>
+          <Link href='' className='text-black'>Shop</Link>
+           <Link href='' className='text-black'> 
+          {session ? (
+        <>
+          <span>Hi, {session.user?.name}</span>
+          <button className='mx-2' onClick={() => signOut()}>Sign out</button>
+        </>
+      ) : (
+        <button onClick={() => signIn("google")}>Sign in with Google</button>
+        
+      )}
+      </Link> 
           <Link href='' className='text-black'></Link>
           <Link href='/cart'><FaShoppingCart className='text-3xl text-gray-600'></FaShoppingCart></Link>
         </div>
