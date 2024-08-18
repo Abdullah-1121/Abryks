@@ -1,8 +1,9 @@
 import React from 'react'
+import InForm from '@/components/inForm'
 
 const page = () => {
   return (
-    <div>page</div>
+   <InForm></InForm>
   )
 }
 

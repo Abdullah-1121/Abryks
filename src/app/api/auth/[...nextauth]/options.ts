@@ -20,8 +20,10 @@ export const authOptions : NextAuthOptions = {
                         async authorize(credentials:any):Promise<any>{
                             await dbConnect();
                             try{
+                              console.log(credentials.identifier)
+                              console.log(credentials)
                             const user =     await User.findOne({
-                                     email: credentials.identifier
+                                     email: credentials.email
                                 })
                                 if(!user){
                                     throw new Error ('No user found with this email')
@@ -87,6 +89,9 @@ export const authOptions : NextAuthOptions = {
         session.user.email = token.email
         }
         return session
+    },
+    async redirect({ url, baseUrl }) {
+        return baseUrl
     }
     
 },
