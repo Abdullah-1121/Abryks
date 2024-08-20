@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
-import image1 from '@/assets/front-blank-white-tshirt-with-hanger-template.png';
-import image2 from '@/assets/monocolor-doodle-softball-is-my-passion-t-shirt.png';
-import image3 from '@/assets/black-shirt-with-word-ultra-it.png';
+import image1 from '@/assets/DALLE2024-08-1921.49.27-Amodernt-shirtdisplayedonaplainwhitebackgroundasifshowcasedinastore.Thet-shirtiscasualwithaminimalistgeometricpatterninblac-ezgif.com-webp-to-jpg-converter-removebg-preview.png';
+
+import image3 from '@/assets/DALLE2024-08-1922.32.38-Astylishshort-sleevedbutton-upshirthangingonahangerfeaturingavibrantcolorfulabstractfloralpatternsimilartovintageHawaiianshirts-ezgif.com-webp-to-jpg-converter-removebg-preview.png';
+import image4 from '@/assets/DALLE2024-08-1922.32.44-Astylishshort-sleevedbutton-upshirthangingonahangerfeaturingamoderngeometricpattern.Thedesignincludescleanabstractshapesinamo-ezgif.com-webp-to-jpg-converter-removebg-preview.png'
+import image5 from '@/assets/f3__1_-removebg-preview.png'
+import image6 from '@/assets/f6__1_-removebg-preview.png'
+import image7 from '@/assets/f8__1_-removebg-preview.png'
 import Image from 'next/image';
 
 const HeroSlider = () => {
-  const images = [image1, image2, image3];
+  const images = [image1,image3,image4 , image5,image6,image7];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
