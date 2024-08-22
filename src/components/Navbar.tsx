@@ -1,13 +1,15 @@
 'use client'
 import Link from 'next/link'
 import { useState , useEffect } from 'react';
+import {useSelector,useDispatch} from 'react-redux'
+import { addToCart , removeProduct , Addone , removeOne} from '@/redux/CartSlice'
 import {motion , AnimatePresence} from 'framer-motion'
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Toaster, toast } from 'sonner'
 import Image from 'next/image'
 import logo from '@/assets/transparent_2024-08-20T06-07-09 (1).png'
 import {FaHome} from 'react-icons/fa'
-
+import Sheet from '@/components/sheet';
 import { FaFacebook, FaTwitter, FaLinkedin ,FaTelegram ,FaTimes ,FaEnvelope, FaBars , FaInstagram , FaGithub , FaShoppingBag , FaShoppingCart , FaDollarSign } from 'react-icons/fa';
 
 
@@ -15,6 +17,13 @@ import { FaFacebook, FaTwitter, FaLinkedin ,FaTelegram ,FaTimes ,FaEnvelope, FaB
 const Navbar = () => {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const openSheet = () => setIsSheetOpen(true);
+  const closeSheet = () => setIsSheetOpen(false);
+  const cart = useSelector((state:any) => state.cart);
+  const dispatch = useDispatch();
+  const handleRemoveFromCart = (product:any) => { dispatch(removeProduct(product)); };
   const greeting = (name: string) => {
     
     toast.success(`Welcome ${name}`);
@@ -73,14 +82,15 @@ const Navbar = () => {
 
 
   return (
-    <nav className=" p-4  rounded-xl">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-teal-500 text-2xl"><Image src={logo} alt='abryks' width={60} height={60}></Image></div>
+    <nav className=" p-4  rounded-xl shadow-xl">
+      <div className="container mx-auto flex justify-between items-center ">
+        <div className="font-bold text-2xl flex justfiy-center items-center"><Image src={logo} alt='abryks' width={50} height={50}></Image> <p>ₐbᵣyₖₛ</p></div>
         <Toaster position='top-center' richColors/>
         <div className="hidden md:flex space-x-6">
           <Link href='' className='text-black font-bold'>Shop</Link>
           
           <div>
+         
       
        
     </div>
@@ -98,10 +108,71 @@ const Navbar = () => {
       )}
       </div> 
           <Link href='' className='text-black'></Link>
-          <Link href='/cart'><FaShoppingCart className='text-3xl text-gray-600'></FaShoppingCart></Link>
+          <div>
+      <div onClick={openSheet}>
+        <FaShoppingCart className="text-3xl text-gray-600" />
+      </div>
+      <Sheet isOpen={isSheetOpen} onClose={closeSheet}>
+        <h2 className="text-xl font-bold">Shopping Cart</h2>
+        <div className="h-full w-full flex flex-col justify-start items-center p-2 m-2 overflow-y-auto">
+  {cart.cartItems.map((item: any) => (
+    <div
+      key={item._id}
+      className="bg-white rounded-lg shadow-md p-4 mb-2 flex items-center w-full "
+    >
+      {/* Product Image */}
+      <div className="flex-shrink-0 h-[100px] w-[100px] overflow-hidden rounded-md border border-gray-200 ">
+        <Image
+          src={item.ImageUrl}
+          alt={item.title}
+          width={100}
+          height={100}
+          className="object-cover h-full w-full"
+        />
+      </div>
+
+      {/* Product Details */}
+      <div className="ml-4 flex flex-col justify-between flex-grow">
+        <h2 className="text-[14px] font-semibold">{item.title}</h2>
+        <p className="text-gray-600 text-[10px]">${item.price}</p>
+
+        {/* Quantity and Remove */}
+        <div className="flex items-center justify-between mt-2">
+          <button
+            onClick={() => handleRemoveFromCart(item)}
+            className="text-red-500 text-[10px] hover:underline"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+  <div className='flex flex-col '>
+    <div className='flex justify-between mb-2'><p>Subtotal</p><p>${cart.totalAmount}</p></div>
+    <div className='flex justify-between mb-2'><p>Total:</p>${cart.totalAmount}</div>
+    <div className='mb-2'><p className='text-[10px] text-gray-400'>Tax included and shipping calculated at checkout</p></div>
+    <div className='mb-2'><button className='bg-black hover:bg-gray-600 text-white rounded-md w-full p-2'>Checkout</button></div>
+    <div><Link href={'/cart'} className=''><button className='bg-white text-black border-2 border-black w-full p-2 rounded-md hover:underline'>View in Cart</button></Link></div>
+  </div>
+</div>
+
+        {/* Cart items will be listed here */}
+        
+      </Sheet>
+    </div>
         </div>
         <div className="md:hidden flex items-center">
-        <FaShoppingCart className='text-3xl text-gray-600 mx-2'></FaShoppingCart>
+        <div className='m-2'>
+      <div onClick={openSheet}>
+        <FaShoppingCart className="text-3xl text-gray-600" />
+      </div>
+      <Sheet isOpen={isSheetOpen} onClose={closeSheet}>
+        <h2 className="text-xl font-bold">Your Cart</h2>
+        {/* Cart items will be listed here */}
+        
+      </Sheet>
+    </div>
           <button onClick={toggleMenu}>
           <FaBars className='text-3xl text-gray-600'></FaBars>
           </button>
@@ -135,7 +206,7 @@ const Navbar = () => {
          <Link href='/cart' onClick={toggleMenu} className='text-black font-semibold    p-2 '>  Cart </Link><FaShoppingCart className='text-2xl mx-2'></FaShoppingCart> </div>
           
           <div className="font-bold text-2xl w-full flex flex-col flex-grow justify-center items-center"><Image src={logo}  alt='abryks' width={70} height={70}></Image>
-          <p>Abryks</p></div>
+          <p>ₐbᵣyₖₛ</p></div>
           <div className='w-full p-4 m-2  flex justify-between'>
          <Link href='https://www.facebook.com/profile.php?id=100071642654808&mibextid=ZbWKwL'> <FaFacebook className="text-blue-700 text-2xl " /></Link>
          <Link href='https://www.linkedin.com/in/muhammad-abdullah-7266a12b6/' > <FaLinkedin className="text-blue-500 text-2xl" /></Link>
