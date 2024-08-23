@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import getStripe from '../lib/stripe';
+import clsx from 'clsx';
 
 
 interface CartItem {
@@ -41,7 +42,7 @@ const CheckoutButton: React.FC = () => {
   };
 
   return (
-    <button onClick={handleCheckout} className="checkout-button bg-blue-600 p-2 text-white rounded-lg hover:bg-blue-800">
+    <button onClick={handleCheckout} className={clsx("bg-black hover:bg-gray-600 text-white rounded-md w-full p-2 ")}>
       Checkout
     </button>
   );
