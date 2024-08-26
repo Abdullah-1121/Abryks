@@ -83,7 +83,7 @@ const Navbar = () => {
 
 
   return (
-    <nav className=" p-4  rounded-xl shadow-xl">
+    <nav className=" p-2 mx-2  rounded-xl shadow-xl border-2  bg-white">
       <div className="container mx-auto flex justify-between items-center ">
         <div className="font-bold text-2xl flex justfiy-center items-center"><Image src={logo} alt='abryks' width={50} height={50}></Image> <p>ₐbᵣyₖₛ</p></div>
         <Toaster position='top-center' richColors/>
@@ -230,7 +230,7 @@ const Navbar = () => {
      {isOpen && (
       <>
        <div
-       className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-40"
+       className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50"
        onClick={toggleMenu}
      />
       

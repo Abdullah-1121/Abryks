@@ -1,14 +1,14 @@
 import {client} from "@/sanity/lib/client"
 const Products = async () => {
     const query = `
-      *[_type == "products"][0...6]{
+   *[_type == "products"] | order(_createdAt desc)[0...8]{
   _id,
-    price,
-    title,
-    Description,
-    "slug":slug.current,
-    "categoryName": category->title,
-    "ImageUrl":image.asset->url
+  price,
+  title,
+  Description,
+  "slug": slug.current,
+  "categoryName": category->title,
+  "ImageUrl": image.asset->url
 }
 
     `;
@@ -19,3 +19,16 @@ const Products = async () => {
   };
   
   export default Products
+  
+
+
+
+  // *[_type == "products"][0...9]{
+  //   _id,
+  //     price,
+  //     title,
+  //     Description,
+  //     "slug":slug.current,
+  //     "categoryName": category->title,
+  //     "ImageUrl":image.asset->url
+  // }
