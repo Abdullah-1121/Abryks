@@ -54,8 +54,8 @@ export default  function ProductPage({params}:{
     
     return (
         <>
-         <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
+         <div className="container mx-auto px-4 py-8 flex flex-grow">
+      <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 flex-grow">
         <div className="w-full lg:w-1/2">
           <Image 
             src={products.ImageUrl}

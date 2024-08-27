@@ -11,7 +11,7 @@ import logo from '@/assets/transparent_2024-08-20T06-07-09 (1).png'
 import {FaHome} from 'react-icons/fa'
 import Sheet from '@/components/sheet';
 import CheckoutButton from './checkoutbtn';
-import { FaFacebook, FaTwitter, FaLinkedin ,FaTelegram ,FaTimes ,FaEnvelope, FaBars , FaInstagram , FaGithub , FaShoppingBag , FaShoppingCart , FaDollarSign } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaLinkedin ,FaTelegram ,FaTimes ,FaEnvelope, FaBars , FaInstagram , FaGithub , FaShoppingBag , FaShoppingCart , FaDollarSign, FaShoppingBasket } from 'react-icons/fa';
 
 
 
@@ -87,8 +87,10 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center ">
         <div className="font-bold text-2xl flex justfiy-center items-center"><Image src={logo} alt='abryks' width={50} height={50}></Image> <p>ₐbᵣyₖₛ</p></div>
         <Toaster position='top-center' richColors/>
-        <div className="hidden md:flex space-x-6">
-          <Link href='' className='text-black font-bold'>Shop</Link>
+        <div className="hidden md:flex space-x-6 ">
+          <Link href='' className='text-black font-bold hover:scale-x-75 hover:translate-2 duration-75'>Shop
+
+          </Link>
           
           <div>
          
@@ -101,10 +103,10 @@ const Navbar = () => {
           {/* <span>Hi, {session.user?.name}</span> */}
           
           
-          <button className='mx-2 font-bold' onClick={() => signOut()}>Sign out</button>
+          <button className='mx-2 font-bold hover:scale-x-75 hover:translate-2 duration-75' onClick={() => signOut()}>Sign out</button>
         </>
       ) : (
-        <Link href='/sign-in' className='font-bold'>Sign In</Link>
+        <Link href='/sign-in' className='font-bold hover:scale-x-75 hover:translate-2 duration-75'>Sign In</Link>
         
       )}
       </div> 
