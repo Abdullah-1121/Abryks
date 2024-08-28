@@ -69,7 +69,7 @@ export default  function ProductPage({params}:{
         <p className='text-md '>{products.categoryName}</p>
           <h1 className="text-3xl font-bold mb-4">{products.title}</h1>
           <p className="text-gray-600 mb-4">{products.Description}</p>
-          <button className='px-4 py-2 mb-2 bg-blue-500 rounded-full w-auto flex space-x-2'><span className='text-white text-sm '> 4.1</span><FaStar className='text-white'></FaStar> </button>
+          <button className='px-4 py-2 mb-2 bg-black rounded-full w-auto flex space-x-2'><span className='text-white text-sm '> 4.1</span><FaStar className='text-white'></FaStar> </button>
           <p className="text-xl  font-bold mb-2">${products.price}</p>
           <span className='text-sm mb-2'>Incl. plus shipping</span>
           <div className='flex mb-2'>
@@ -93,14 +93,14 @@ export default  function ProductPage({params}:{
           </div> */}
           <button 
            
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-700"
             onClick={()=>{addtoCart({products})}}
           >
             Add to Cart
           </button>
           <button 
            
-            className="px-6 py-3 border-2  text-blue-600 rounded-lg hover:bg-gray-200 mx-4"
+            className="px-6 py-3 border-2  text-black rounded-lg hover:bg-gray-200 mx-4"
           >
             Checkout Now
           </button>

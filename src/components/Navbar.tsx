@@ -118,7 +118,7 @@ const Navbar = () => {
       <Sheet isOpen={isSheetOpen} onClose={closeSheet}>
         <h2 className="text-xl font-bold">Shopping Cart</h2>
         <div className="h-full w-full flex flex-col justify-start items-center p-2 m-2 overflow-y-auto">
-  {cart.cartItems.map((item: any) => (
+  {cart.cartItems.slice(0,2).map((item: any) => (
     <div
       key={item._id}
       className="bg-white rounded-lg shadow-md p-4 mb-2 flex items-center w-full "
@@ -137,7 +137,7 @@ const Navbar = () => {
       {/* Product Details */}
       <div className="ml-4 flex flex-col justify-between flex-grow">
         <h2 className="text-[14px] font-semibold">{item.title}</h2>
-        <p className="text-gray-600 text-[10px]">${item.price}</p>
+        <p className="text-gray-600 text-[10px]">{item.price}</p>
 
         {/* Quantity and Remove */}
         <div className="flex items-center justify-between mt-2">
@@ -154,7 +154,8 @@ const Navbar = () => {
   <div className='flex flex-col '>
     
     <div className='flex justify-between mb-2'><p>Subtotal</p><p>${cart.totalAmount}</p></div>
-    <div className='flex justify-between mb-2'><p>Total:</p>${cart.totalAmount}</div>
+    <div className='flex justify-between mb-2'><p>Items</p>{cart.totalQuantity}</div>
+    <div className='flex justify-between mb-2'><p>Total</p>${cart.totalAmount}</div>
     <div className='mb-2'><p className='text-[10px] text-gray-400'>Tax included and shipping calculated at checkout</p></div>
     
     <div className='mb-2'><CheckoutButton ></CheckoutButton></div>
@@ -175,7 +176,7 @@ const Navbar = () => {
       <Sheet isOpen={isSheetOpen} onClose={closeSheet}>
         <h2 className="text-xl font-bold">Shopping Cart</h2>
         <div className="h-full w-full flex flex-col justify-start items-center p-2 m-2 overflow-y-auto">
-  {cart.cartItems.map((item: any) => (
+  {cart.cartItems.slice(0, 2).map((item: any) => (
     <div
       key={item._id}
       className="bg-white rounded-lg shadow-md p-4 mb-2 flex items-center w-full "
@@ -211,7 +212,8 @@ const Navbar = () => {
   <div className='flex flex-col '>
     
     <div className='flex justify-between mb-2'><p>Subtotal</p><p>${cart.totalAmount}</p></div>
-    <div className='flex justify-between mb-2'><p>Total:</p>${cart.totalAmount}</div>
+    <div className='flex justify-between mb-2'><p>Items</p>{cart.totalQuantity}</div>
+    <div className='flex justify-between mb-2'><p>Total</p>${cart.totalAmount}</div>
     <div className='mb-2'><p className='text-[10px] text-gray-400'>Tax included and shipping calculated at checkout</p></div>
     
     <div className='mb-2'><CheckoutButton ></CheckoutButton></div>
