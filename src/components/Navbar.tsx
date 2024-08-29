@@ -83,7 +83,7 @@ const Navbar = () => {
 
 
   return (
-    <nav className=" p-2 mx-2  rounded-xl shadow-xl border-2  bg-white">
+    <nav className=" p-2 mx-2  rounded-xl shadow-xl border-2  bg-gray-200">
       <div className="container mx-auto flex justify-between items-center ">
         <div className="font-bold text-2xl flex justfiy-center items-center"><Image src={logo} alt='abryks' width={50} height={50}></Image> <p>ₐbᵣyₖₛ</p></div>
         <Toaster position='top-center' richColors/>

@@ -49,6 +49,8 @@ export function ImageSlider({ images }: ImageSliderProps) {
           <Image
             key={url}
             src={url}
+            width={500}
+            height={500}
             alt={alt}
             aria-hidden={imageIndex !== index}
             className={`absolute inset-0 object-contain w-full h-full transition-transform duration-300 ease-in-out ${imageIndex === index ? 'translate-x-0' : 'translate-x-full'}`}
