@@ -11,7 +11,7 @@ interface CartItem {
   ImageUrl: string;
 }
 
-const CheckoutButton: React.FC = () => {
+const CheckoutButton: React.FC = ({ className }:{className?: string}) => {
   const cartItems = useSelector((state: any) => state.cart.cartItems) as CartItem[];
 
   const handleCheckout = async () => {
@@ -42,7 +42,7 @@ const CheckoutButton: React.FC = () => {
   };
 
   return (
-    <button onClick={handleCheckout} className={clsx("bg-black hover:bg-gray-600 text-white rounded-md w-full p-2 ")}>
+    <button onClick={handleCheckout} className={clsx("bg-black  text-white rounded-md w-full p-2", className)}>
       Checkout
     </button>
   );

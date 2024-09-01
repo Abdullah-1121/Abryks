@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import { ImagesSlider } from "@/components/images-slider";
 import { Cover } from "./cover";
+import Link from 'next/link'
 
 export default function ImagesSliderDemo() {
   const images = [
@@ -32,10 +33,10 @@ export default function ImagesSliderDemo() {
           GET UPTO <span className="text-emerald-600">30% OFF</span> <br /> ON 
           <Cover>NEW ARRIVALS</Cover> 
         </motion.p>
-        <button className="px-4 py-2 backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white mx-auto text-center rounded-full relative mt-4">
+        <Link href='/shop'><button className="px-4 py-2 backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white mx-auto text-center rounded-full relative mt-4">
           <span>Shop now →</span>
           <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
-        </button>
+        </button></Link>
       </motion.div>
     </ImagesSlider>
   );

@@ -49,7 +49,7 @@ const Featured = () => {
     }
   return (
     // <div className='flex w-full border-2 bp'>Featured</div>
-    <div className="featured-products py-8">
+    <div className="featured-products py-8" id='featured'>
       <div className=' flex justify-between'><h2 className="text-2xl font-bold  mb-6 ml-4">New Arrivals</h2><span className='mx-4 mt-3 text-blue-400 flex '>See All</span></div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product:any) => {

@@ -8,7 +8,7 @@ import {toast,Toaster} from 'sonner'
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-300 text-black py-4">
+    <footer className="bg-gray-100 text-black py-4">
       <Toaster position='top-center' richColors/>
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         {/* Logo or Company Name */}

@@ -6,6 +6,9 @@ import { FaTruck , FaStar} from 'react-icons/fa';
 import { useDispatch, UseDispatch } from 'react-redux';
 import {addToCart} from '@/redux/CartSlice'
 import {useState , useEffect} from 'react'
+import Sheet from '@/components/sheet'
+import Cartsheet from '@/components/Cartsheet';
+import CheckoutButton from '@/components/checkoutbtn'
 
 import Image from 'next/image'
 
@@ -46,15 +49,21 @@ export default  function ProductPage({params}:{
       getData()
     },[])
     let dispatch = useDispatch()
+    const [isOpen, setIsOpen] = useState(false);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const openSheet = () => setIsSheetOpen(true);
+  const closeSheet = () => setIsSheetOpen(false);
     const addtoCart = (product:any)=>{
       dispatch(addToCart(product))
+      openSheet()
     }
   
       
     
     return (
         <>
-         <div className="container mx-auto px-4 py-8 flex flex-grow">
+         <div className="container mx-auto px-4 py-8 flex flex-grow min-h-screen">
       <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 flex-grow">
         <div className="w-full lg:w-1/2">
           <Image 
@@ -75,6 +84,13 @@ export default  function ProductPage({params}:{
           <div className='flex mb-2'>
             <FaTruck></FaTruck><span className='mx-2 text-sm '>3-5 days shipping</span>
           </div>
+          <Sheet isOpen={isSheetOpen} onClose={closeSheet}>
+
+       <Cartsheet/>
+
+        {/* Cart items will be listed here */}
+        
+      </Sheet>
           {/* <div className="flex items-center gap-4 mb-6">
             <button 
               
@@ -91,6 +107,7 @@ export default  function ProductPage({params}:{
             </button>
             
           </div> */}
+          <div className='flex flex-col md:flex-row justify-start'>
           <button 
            
             className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-700"
@@ -100,10 +117,17 @@ export default  function ProductPage({params}:{
           </button>
           <button 
            
-            className="px-6 py-3 border-2  text-black rounded-lg hover:bg-gray-200 mx-4"
-          >
-            Checkout Now
-          </button>
+           className="px-6 py-3 mx-2 bg-black text-white rounded-lg hover:bg-gray-700"
+           
+         >
+           Checkout Now
+         </button>
+         
+            
+        
+          
+          
+          </div>
         </div>
       </div>
     </div>

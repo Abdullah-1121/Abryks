@@ -10,12 +10,15 @@ import Image from 'next/image'
 import logo from '@/assets/transparent_2024-08-20T06-07-09 (1).png'
 import {FaHome} from 'react-icons/fa'
 import Sheet from '@/components/sheet';
+import { useRouter } from 'next/router';
 import CheckoutButton from './checkoutbtn';
-import { FaFacebook, FaTwitter, FaLinkedin ,FaTelegram ,FaTimes ,FaEnvelope, FaBars , FaInstagram , FaGithub , FaShoppingBag , FaShoppingCart , FaDollarSign, FaShoppingBasket } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaSignOutAlt, FaSignInAlt, FaLinkedin ,FaTelegram ,FaTimes ,FaEnvelope, FaBars , FaInstagram , FaGithub , FaShoppingBag , FaShoppingCart , FaDollarSign, FaShoppingBasket } from 'react-icons/fa';
+import CartSheet from './Cartsheet'
 
 
 
 const Navbar = () => {
+ 
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -25,10 +28,12 @@ const Navbar = () => {
   const cart = useSelector((state:any) => state.cart);
   const dispatch = useDispatch();
   const handleRemoveFromCart = (product:any) => { dispatch(removeProduct(product)); };
+  
   const greeting = (name: string) => {
     
     toast.success(`Welcome ${name}`);
   }
+ 
   
   useEffect(() => {
     console.log("Session:", session); // Debugging
@@ -40,8 +45,11 @@ const Navbar = () => {
       
         greeting(session.user?.name);
       }, 500); // Slight delay to ensure session is loaded
+     
     }
   }, [session]);
+
+  
   
 
   const toggleMenu = () => {
@@ -83,12 +91,15 @@ const Navbar = () => {
 
 
   return (
+    <>
+    
     <nav className=" p-2 mx-2  rounded-xl shadow-xl border-2  bg-gray-200">
       <div className="container mx-auto flex justify-between items-center ">
         <div className="font-bold text-2xl flex justfiy-center items-center"><Image src={logo} alt='abryks' width={50} height={50}></Image> <p>ₐbᵣyₖₛ</p></div>
         <Toaster position='top-center' richColors/>
-        <div className="hidden md:flex space-x-6 ">
-          <Link href='' className='text-black font-bold hover:scale-x-75 hover:translate-2 duration-75'>Shop
+        <div className="hidden md:flex space-x-6 justify-center items-center">
+          <Link href='/' className='border-b border-black py-4 text-black font-bold hover:scale-x-110 hover:translate-2 duration-75'>Home</Link>
+          <Link href='/shop' className='text-black font-bold hover:scale-x-110 hover:translate-2 duration-75'>Shop
 
           </Link>
           
@@ -103,65 +114,22 @@ const Navbar = () => {
           {/* <span>Hi, {session.user?.name}</span> */}
           
           
-          <button className='mx-2 font-bold hover:scale-x-75 hover:translate-2 duration-75' onClick={() => signOut()}>Sign out</button>
+          <button className='mx-2 font-bold hover:scale-x-110 hover:translate-2 duration-75' onClick={() => signOut()}>Sign out</button>
         </>
       ) : (
-        <Link href='/sign-in' className='font-bold hover:scale-x-75 hover:translate-2 duration-75'>Sign In</Link>
+        <Link href='/sign-in' className='font-bold hover:scale-x-110 hover:translate-2 duration-75'>Sign In</Link>
         
       )}
       </div> 
-          <Link href='' className='text-black'></Link>
+          <Link href='/#featured' className='text-black font-bold hover:scale-x-110 hover:translate-2 duration-75'>New Arrivals</Link>
           <div>
       <div onClick={openSheet}>
-        <FaShoppingCart className="text-3xl text-gray-600" />
+        <Image alt='cart' src='https://img.icons8.com/?size=100&id=Ot2P5D5MPltM&format=png&color=000000' width={30} height={30}></Image>
+      
       </div>
       <Sheet isOpen={isSheetOpen} onClose={closeSheet}>
-        <h2 className="text-xl font-bold">Shopping Cart</h2>
-        <div className="h-full w-full flex flex-col justify-start items-center p-2 m-2 overflow-y-auto">
-  {cart.cartItems.slice(0,2).map((item: any) => (
-    <div
-      key={item._id}
-      className="bg-white rounded-lg shadow-md p-4 mb-2 flex items-center w-full "
-    >
-      {/* Product Image */}
-      <div className="flex-shrink-0 h-[100px] w-[100px] overflow-hidden rounded-md border border-gray-200 ">
-        <Image
-          src={item.ImageUrl}
-          alt={item.title}
-          width={100}
-          height={100}
-          className="object-cover h-full w-full"
-        />
-      </div>
 
-      {/* Product Details */}
-      <div className="ml-4 flex flex-col justify-between flex-grow">
-        <h2 className="text-[14px] font-semibold">{item.title}</h2>
-        <p className="text-gray-600 text-[10px]">{item.price}</p>
-
-        {/* Quantity and Remove */}
-        <div className="flex items-center justify-between mt-2">
-          <button
-            onClick={() => handleRemoveFromCart(item)}
-            className="text-red-500 text-[10px] hover:underline"
-          >
-            Remove
-          </button>
-        </div>
-      </div>
-    </div>
-  ))}
-  <div className='flex flex-col '>
-    
-    <div className='flex justify-between mb-2'><p>Subtotal</p><p>${cart.totalAmount}</p></div>
-    <div className='flex justify-between mb-2'><p>Items</p>{cart.totalQuantity}</div>
-    <div className='flex justify-between mb-2'><p>Total</p>${cart.totalAmount}</div>
-    <div className='mb-2'><p className='text-[10px] text-gray-400'>Tax included and shipping calculated at checkout</p></div>
-    
-    <div className='mb-2'><CheckoutButton ></CheckoutButton></div>
-    <div><Link href={'/cart'} className=''><button className='bg-white text-black border-2 border-black w-full p-2 rounded-md hover:underline'>View in Cart</button></Link></div>
-  </div>
-</div>
+       <CartSheet/>
 
         {/* Cart items will be listed here */}
         
@@ -171,62 +139,16 @@ const Navbar = () => {
         <div className="md:hidden flex items-center">
         <div className='m-2'>
       <div onClick={openSheet}>
-        <FaShoppingCart className="text-3xl text-gray-600" />
+      <Image alt='cart' src='https://img.icons8.com/?size=100&id=Ot2P5D5MPltM&format=png&color=000000' width={30} height={30}></Image>
       </div>
       <Sheet isOpen={isSheetOpen} onClose={closeSheet}>
-        <h2 className="text-xl font-bold">Shopping Cart</h2>
-        <div className="h-full w-full flex flex-col justify-start items-center p-2 m-2 overflow-y-auto">
-  {cart.cartItems.slice(0, 2).map((item: any) => (
-    <div
-      key={item._id}
-      className="bg-white rounded-lg shadow-md p-4 mb-2 flex items-center w-full "
-    >
-      {/* Product Image */}
-      <div className="flex-shrink-0 h-[100px] w-[100px] overflow-hidden rounded-md border border-gray-200 ">
-        <Image
-          src={item.ImageUrl}
-          alt={item.title}
-          width={100}
-          height={100}
-          className="object-cover h-full w-full"
-        />
-      </div>
-
-      {/* Product Details */}
-      <div className="ml-4 flex flex-col justify-between flex-grow">
-        <h2 className="text-[14px] font-semibold">{item.title}</h2>
-        <p className="text-gray-600 text-[10px]">${item.price}</p>
-
-        {/* Quantity and Remove */}
-        <div className="flex items-center justify-between mt-2">
-          <button
-            onClick={() => handleRemoveFromCart(item)}
-            className="text-red-500 text-[10px] hover:underline"
-          >
-            Remove
-          </button>
-        </div>
-      </div>
-    </div>
-  ))}
-  <div className='flex flex-col '>
-    
-    <div className='flex justify-between mb-2'><p>Subtotal</p><p>${cart.totalAmount}</p></div>
-    <div className='flex justify-between mb-2'><p>Items</p>{cart.totalQuantity}</div>
-    <div className='flex justify-between mb-2'><p>Total</p>${cart.totalAmount}</div>
-    <div className='mb-2'><p className='text-[10px] text-gray-400'>Tax included and shipping calculated at checkout</p></div>
-    
-    <div className='mb-2'><CheckoutButton ></CheckoutButton></div>
-    <div><Link href={'/cart'} className=''><button className='bg-white text-black border-2 border-black w-full p-2 rounded-md hover:underline'>View in Cart</button></Link></div>
-  </div>
-</div>
-
-        {/* Cart items will be listed here */}
+     
+        <CartSheet/>
         
       </Sheet>
     </div>
           <button onClick={toggleMenu}>
-          <FaBars className='text-3xl text-gray-600'></FaBars>
+          <Image alt='menu' src='https://img.icons8.com/?size=100&id=30UIOfuJpZnZ&format=png&color=000000' className='text-2xl text-black-400  ml-auto' width={30} height={30} onClick={toggleMenu}></Image>
           </button>
         </div>
       </div>
@@ -242,20 +164,38 @@ const Navbar = () => {
           
          <motion.div className="bg-white border-3 border-black w-full h-full rounded-xl p-6 flex flex-col  items-start justify-start space-y-4" variants={itemVariants} initial='closed' animate='open'  exit='closed'>
           
-         <div className='w-full p-2 m-2 flex justify-between  ' >
+         <div className='w-full p-2 m-2 flex justify-between items-center ' >
           <p className='font-bold py-2 text-lg'>Menu</p>
-         <FaTimes className='text-3xl text-black-400  ml-auto' onClick={toggleMenu}></FaTimes>
+         <FaTimes className='text-2xl' onClick={toggleMenu}></FaTimes>
          
          </div>
          <div className='w-full rounded-lg hover:bg-gray-200  flex justify-between items-center'>
          <Link href='/' className='text-black font-semibold    p-2 ' onClick={toggleMenu}>  Home </Link><FaHome className='text-2xl mx-2' ></FaHome> </div>
        
          <div className='w-full rounded-lg  flex justify-between hover:bg-gray-200  items-center'>
-         <Link href='' className='text-black font-semibold    p-2 ' onClick={toggleMenu}>  Shop </Link><FaShoppingBag className='text-2xl mx-2'></FaShoppingBag> </div>
+         <Link href='/shop' className='text-black font-semibold    p-2 ' onClick={toggleMenu}>  Shop </Link><FaShoppingBag className='text-2xl mx-2'></FaShoppingBag> </div>
          <div className='w-full rounded-lg hover:bg-gray-200  flex justify-between items-center'>
-         <Link href='' className='text-black font-semibold    p-2 ' onClick={toggleMenu}>  New Arrivals </Link><FaDollarSign className='text-2xl mx-2'></FaDollarSign> </div>
+         <Link href='/#featured' className='text-black font-semibold    p-2 ' onClick={toggleMenu}>  New Arrivals </Link><FaDollarSign className='text-2xl mx-2'></FaDollarSign> </div>
          <div className='w-full rounded-lg  flex justify-between hover:bg-gray-200  items-center' >
-         <Link href='/cart' onClick={toggleMenu} className='text-black font-semibold    p-2 '>  Cart </Link><FaShoppingCart className='text-2xl mx-2'></FaShoppingCart> </div>
+          {session ? (
+            <div className=' w-full h-full flex justify-between p-2'>
+            <button className=' text-black font-semibold' onClick={() => signOut()}>Sign Out</button>
+            <FaSignOutAlt className=' text-2xl '></FaSignOutAlt>
+            </div>
+            
+            
+          ):(
+            <div className=' w-full h-full flex justify-between'>
+
+            <Link href='/sign-in' className='ml-2 text-black font-semibold' onClick={toggleMenu}>Sign In</Link>
+            <FaSignInAlt  className='mr-2 text-2xl '></FaSignInAlt>
+            </div>
+          )}
+         
+         
+      </div>
+         {/* <Link href='/cart' onClick={toggleMenu} className='text-black font-semibold    p-2 '>  Cart </Link><FaShoppingCart className='text-2xl mx-2'></FaShoppingCart> */}
+         
           
           <div className="font-bold text-2xl w-full flex flex-col flex-grow justify-center items-center"><Image src={logo}  alt='abryks' width={70} height={70}></Image>
           <p>ₐbᵣyₖₛ</p></div>
@@ -276,6 +216,7 @@ const Navbar = () => {
       </AnimatePresence>
       
     </nav>
+    </>
   );
 };
 
