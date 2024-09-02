@@ -137,13 +137,14 @@ const cart = createSlice({
 
 
 
-        }
+        },
+        
 
         
        
             }
         })
-        export const { addToCart,  removeProduct, Addone, removeOne } = cart.actions;
+        export const { addToCart,  removeProduct, Addone, removeOne  } = cart.actions;
         export default cart.reducer;
 // import { createSlice , PayloadAction } from "@reduxjs/toolkit";
 // //  interface cartitem {

@@ -86,7 +86,7 @@ const Featured = () => {
             {/* <p className="product-description text-gray-400 text-sm text-center">{product.Description}</p> */}
             <p className="product-category text-gray-500 text-center">Category: {product.categoryName}</p>
             <div className=' flex w-full p-2  justify-center items-center  '>
-              <button className='p-2 bg-black text-white  rounded-md hover:bg-gray-700 w-full flex justify-center items-center' >Shop Now <FaShoppingBag className=' mx-2 text-xl text-white'></FaShoppingBag></button>
+              <button className='p-2 bg-gray-600 text-white  rounded-md hover:bg-gray-700 w-full flex justify-center items-center' >Shop Now <FaShoppingBag className=' mx-2 text-xl text-white'></FaShoppingBag></button>
             </div>
             
             

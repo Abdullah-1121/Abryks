@@ -68,18 +68,13 @@ setfilteredProducts(allProducts)
   setSearchTerm(searchQuery)
  if(searchQuery){
  
-  const filteredProducts = products.filter((product)=>{
-    product.title.toLowerCase()===searchQuery;
-    
-   
-    
-  })
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchQuery)
+  );
   
-  products.map((product)=>{
-    console.log(product.title.toLowerCase())
-  })
-  setfilteredProducts(filteredProducts)
-  console.log("filtered products : ", filteredProducts , " search query : " , searchQuery)
+ 
+setfilteredProducts(filteredProducts)
+console.log("Filtered products:", filteredProducts, "Search query:", searchQuery);
  }else {
   setfilteredProducts(products)
  }
@@ -93,8 +88,8 @@ setfilteredProducts(allProducts)
 
         </div>
         <div className='search-bar flex justify-start items-center w-full '>
-            <input type="text" value={searchTerm} onChange={handleChange} placeholder='search for product , category' className='px-2 py-1 border-gray-500 m-2 rounded-md text-sm text-gray-300' />
-            <input type="checkbox" name='men'  />
+           <p className='mx-2 text-sm '>Search any product here </p> <input type="text" value={searchTerm} onChange={handleChange} placeholder='Enter Name of Product' className='px-2 py-1 border-gray-80000 m-2 rounded-md text-sm text-gray-300' />
+            
         </div>
         <div className="product-grid grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 p-2 lg:grid-cols-4 gap-4 mt-4">
   {filteredProducts.map((product: any) => {
@@ -147,7 +142,7 @@ setfilteredProducts(allProducts)
             Category: {product.categoryName}
           </p>
           <div className="w-full p-2 justify-center items-center hidden md:flex">
-  <button className="md:p-2 p-1 bg-black text-white rounded-md hover:bg-gray-700 w-full flex justify-center items-center">
+  <button className="md:p-2 p-1 bg-gray-600 text-white rounded-md hover:bg-gray-700 w-full flex justify-center items-center">
     Shop Now <FaShoppingBag className="mx-2 md:text-xl text-md text-white" />
   </button>
 </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Exo} from "next/font/google";
 import "./globals.css";
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/footer'
@@ -7,7 +7,7 @@ import CustomProvider from "@/redux/CartProvider";
 import store from "@/redux/store"
 import AuthProvider from '@/components/authProvider'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Exo({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",

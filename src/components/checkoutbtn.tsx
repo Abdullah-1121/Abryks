@@ -12,10 +12,12 @@ interface CartItem {
 }
 
 const CheckoutButton: React.FC = ({ className }:{className?: string}) => {
-  const cartItems = useSelector((state: any) => state.cart.cartItems) as CartItem[];
+  const cartItems = useSelector((state: any) => state.cart.cartItems) as CartItem[];  
 
   const handleCheckout = async () => {
+    
     try {
+      
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: {

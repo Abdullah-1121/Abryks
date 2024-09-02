@@ -5,6 +5,7 @@ import { addToCart , removeProduct , Addone , removeOne} from '@/redux/CartSlice
 import Image from 'next/image'
 import CheckoutButton from './checkoutbtn'
 import {FaTrash , FaTimes} from 'react-icons/fa'
+
 import Link from 'next/link'
 const shoppingcart = () =>{
   const cart = useSelector((state:any) => state.cart);
@@ -144,11 +145,12 @@ const shoppingcart = () =>{
                 <div className='w-[80%]  m-2 '>
                   <p className='text-[10px] text-gray-500'>Tax and Shipping calculated at Checkout</p>
                 </div>
-                <div className='flex  m-2 p-2 w-full md:w-[80%]  justify-center items-center'>
-                  <button className='bg-white p-2 w-[80%] border-2 border-black rounded-lg shadow-xl hover:underline text-sm md:text-md'>Proceed to Checkout</button>
+                <div className='flex  m-2 p-2 w-[80%] md:w-[60%]  justify-center items-center'>
+                  {/* <button className='bg-white p-2 w-[80%] border-2 border-black rounded-lg shadow-xl hover:underline text-sm md:text-md'>Proceed to Checkout</button> */}
+                 <CheckoutButton></CheckoutButton>
                 </div>
-                <div className='flex  m-2 p-2 w-full md:w-[80%] justify-center items-center'>
-                  <button className='bg-black text-white p-2 w-[80%] border-2 border-black rounded-lg shadow-xl hover:bg-gray-700 text-sm md:text-md'>Continue Shopping</button>
+                <div className='flex  m-2 p-2 w-full md:w-[70%] justify-center items-center'>
+                  <button className='bg-white text-black p-2 w-[80%] border-2 border-black rounded-lg shadow-xl hover:underline text-sm md:text-md'>Continue Shopping</button>
                 </div>
               </div>
               </div>

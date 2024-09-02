@@ -1,16 +1,20 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { useState , useEffect } from 'react'
 import CheckoutButton from './checkoutbtn'
-import { addToCart , removeProduct , Addone , removeOne} from '@/redux/CartSlice'
+import { addToCart , removeProduct , Addone , removeOne } from '@/redux/CartSlice'
 import Link from 'next/link'
 
 
 const Cartsheet = () => {
     const cart = useSelector((state:any) => state.cart);
+    
   const dispatch = useDispatch();
   const handleRemoveFromCart = (product:any) => { dispatch(removeProduct(product)); };
+  
+  
   return (
     <>
     <h2 className="text-xl font-bold">Shopping Cart</h2>

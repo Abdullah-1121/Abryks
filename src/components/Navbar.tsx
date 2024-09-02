@@ -26,6 +26,7 @@ const Navbar = () => {
   const openSheet = () => setIsSheetOpen(true);
   const closeSheet = () => setIsSheetOpen(false);
   const cart = useSelector((state:any) => state.cart);
+  const items = cart.cartItems.length;
   const dispatch = useDispatch();
   const handleRemoveFromCart = (product:any) => { dispatch(removeProduct(product)); };
   
@@ -123,10 +124,21 @@ const Navbar = () => {
       </div> 
           <Link href='/#featured' className='text-black font-bold hover:scale-x-110 hover:translate-2 duration-75'>New Arrivals</Link>
           <div>
-      <div onClick={openSheet}>
-        <Image alt='cart' src='https://img.icons8.com/?size=100&id=Ot2P5D5MPltM&format=png&color=000000' width={30} height={30}></Image>
-      
+          <div className="relative inline-block">
+      <div onClick={openSheet} className="cursor-pointer">
+        <Image
+          alt='cart'
+          src='https://img.icons8.com/?size=100&id=Ot2P5D5MPltM&format=png&color=000000'
+          width={30}
+          height={30}
+        />
       </div>
+      {items > 0 && (
+        <span className="absolute top-0 right-0 -mt-1 -mr-1 w-5 h-5 bg-red-600 text-white text-xs flex items-center justify-center rounded-full">
+          {items}
+        </span>
+      )}
+    </div>
       <Sheet isOpen={isSheetOpen} onClose={closeSheet}>
 
        <CartSheet/>
@@ -138,9 +150,21 @@ const Navbar = () => {
         </div>
         <div className="md:hidden flex items-center">
         <div className='m-2'>
-      <div onClick={openSheet}>
-      <Image alt='cart' src='https://img.icons8.com/?size=100&id=Ot2P5D5MPltM&format=png&color=000000' width={30} height={30}></Image>
+        <div className="relative inline-block">
+      <div onClick={openSheet} className="cursor-pointer">
+        <Image
+          alt='cart'
+          src='https://img.icons8.com/?size=100&id=Ot2P5D5MPltM&format=png&color=000000'
+          width={30}
+          height={30}
+        />
       </div>
+      {items > 0 && (
+        <span className="absolute top-0 right-0 -mt-1 -mr-1 w-5 h-5 bg-red-600 text-white text-xs flex items-center justify-center rounded-full">
+          {items}
+        </span>
+      )}
+    </div>
       <Sheet isOpen={isSheetOpen} onClose={closeSheet}>
      
         <CartSheet/>

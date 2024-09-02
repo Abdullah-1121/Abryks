@@ -23,8 +23,8 @@ const Footer = () => {
         <div className="flex flex-col md:flex-col md:items-center mb-4 md:mb-0">
           <p className=' text-lg md:text-xl font-semibold text-center'>Sign Up to Our Newsletter</p>
           <div>
-        <input type="text" placeholder='Email Address' className='px-4 py-2 rounded-md m-2' />
-        <button onClick={() => toast.info('Done')} className="bg-emerald-500 text-white px-4 py-2 rounded-md hover:bg-emerald-600">Subscribe</button>
+        <input type="text" placeholder='Email Address' className='px-4 py-2 rounded-md m-2' required/>
+        <button onClick={() => toast.info('Done')} type='submit' className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-800">Subscribe</button>
         </div>
         </div>
 
