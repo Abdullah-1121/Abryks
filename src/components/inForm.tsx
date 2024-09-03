@@ -80,7 +80,7 @@ function ContactForm(
            <button type="submit" className="  p-2 md:p-4 m-4 md:w-[70%] w-[80%] text-primary-dark rounded-xl  hover:shadow-xl hover:bg-blue-400 bg-blue-600 text-white ">
               Sign In
             </button>
-            <p className="mb-4 text-sm">Don't Have an account? <Link href='/sign-up' className="text-blue-600 underline">Sign Up</Link></p>
+            <p className="mb-4 text-sm">Dont Have an account? <Link href='/sign-up' className="text-blue-600 underline">Sign Up</Link></p>
             <div  onClick={() => signIn("google",{callbackUrl:"/"})} className="bg-white p-2 flex justify-center md:w-[70%] w-[80%] items-center rounded-lg  text-blue-600 border-2 mb-4 border-blue-600 ">
                      <FaGoogle className="text-blue-600 m-2 "/><p className="text-md font-semibold hover:underline">Login with Google</p>
           </div>

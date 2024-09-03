@@ -59,7 +59,7 @@ function ContactForm(
         }catch(error){
             alert('Error submitting form'
             )
-            console.log(error)
+            // console.log(error)
 
 
         }

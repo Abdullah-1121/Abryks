@@ -9,7 +9,7 @@ import{ motion }from 'framer-motion'
 import { FaShoppingBag } from 'react-icons/fa'
 
 
-const page = () => {
+const Shoppage = () => {
 
   const convars = {
     initial :{
@@ -158,4 +158,4 @@ console.log("Filtered products:", filteredProducts, "Search query:", searchQuery
   )
 }
 
-export default page
+export default Shoppage

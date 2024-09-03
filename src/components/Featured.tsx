@@ -55,7 +55,7 @@ const Featured = () => {
         {products.map((product:any) => {
             const randomRating = getRandomRating();
          return(
-          <Link href={`/products/${product.slug}`}>
+          <Link href={`/products/${product.slug}`} key={product._id}>
           <motion.div variants={convars} initial="initial" whileHover="animate" key={product._id} className="product-card border hover:bg-gray-100 border-gray-300 rounded-lg p-4 shadow-lg flex flex-col justify-center h-full">
             <div className=' bg-gray-100 rounded-md'><Image src={product.ImageUrl} alt={product.title} width={300} height={300} className="product-image w-full h-48 object-contain mb-4 rounded" ></Image></div>
           

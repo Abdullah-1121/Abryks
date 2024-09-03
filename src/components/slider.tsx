@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import { ImagesSlider } from "@/components/images-slider";
-import { Cover } from "./cover";
+import { Cover } from "@/components/cover"
 import Link from 'next/link'
 
 export default function ImagesSliderDemo() {
