@@ -5,6 +5,7 @@ import type { NextRequest } from 'next/server';
 export async function middleware(req: NextRequest) {
   // Check for the token in cookies
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  console.log("token",token)
 
   // List of paths that should be protected
   const protectedPaths = ['/cart', '/products'];
