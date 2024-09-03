@@ -8,6 +8,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { Toaster, toast } from 'sonner'
 import Image from 'next/image'
 import logo from '@/assets/transparent_2024-08-20T06-07-09 (1).png'
+import { usePathname } from 'next/navigation';
 import {FaHome} from 'react-icons/fa'
 import Sheet from '@/components/sheet';
 import { useRouter } from 'next/router';
@@ -22,6 +23,7 @@ const Navbar = () => {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+ 
 
   const openSheet = () => setIsSheetOpen(true);
   const closeSheet = () => setIsSheetOpen(false);

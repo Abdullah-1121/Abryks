@@ -21,39 +21,7 @@ function ContactForm(
     });
     const onSubmit = async (data:fieldNames)=>{
         try{
-    //         let response = await fetch ('/api/sign-up',{
-    //             method:'POST',
-    //             headers:{
-    //               "Content-Type": "application/json",
-    //             },
-    //             body:JSON.stringify(data)
-        
-    //           });
-    //           const responseData = await response.json();
-    //           if(responseData.ok){
-    //             alert('Submitted');
-    //           }else{
-    //             alert(responseData.error)
-    //             console.log(responseData.error)
-    //           }
-    //   const {errors={}} = responseData;
-    //   const fieldmappings:Record<string,validFieldNames>={
-
-       
-    //     email:'email',
-    //     password:'password',
-        
-    //   }
-    //   const fieldwithError = Object.keys(fieldmappings).find(
-    //     (field)=>errors[field]
-    //   )
-    //   if(fieldwithError){
-    //     setError(fieldmappings[fieldwithError], {
-    //       type: "server",
-    //       message: errors[fieldwithError],
-    //     });
-    //   }
-    //   reset()
+   
     const result = await signIn('credentials', {
         redirect: false,
         email: data.email,
@@ -78,7 +46,7 @@ function ContactForm(
         }catch(error){
             alert('Error submitting form'
             )
-            console.log(error)
+            // console.log(error)
 
 
         }

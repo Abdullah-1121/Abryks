@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState , useEffect } from 'react'
 import CheckoutButton from './checkoutbtn'
-import { addToCart , removeProduct , Addone , removeOne } from '@/redux/CartSlice'
+import { addToCart , removeProduct , Addone , removeOne ,loadCart} from '@/redux/CartSlice'
 import Link from 'next/link'
 
 
@@ -13,6 +13,21 @@ const Cartsheet = () => {
     
   const dispatch = useDispatch();
   const handleRemoveFromCart = (product:any) => { dispatch(removeProduct(product)); };
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '{}');
+      if (cartFromLocalStorage.cartItems) {
+        dispatch(loadCart(cartFromLocalStorage));
+      }
+    }
+  }, [dispatch]);
+
+  // Save cart to local storage whenever cart items change
+  useEffect(() => {
+    if (typeof window !== 'undefined' && cart.cartItems.length > 0) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart]);
   
   
   return (

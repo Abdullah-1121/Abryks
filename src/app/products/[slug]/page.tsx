@@ -16,19 +16,7 @@ import {motion} from 'framer-motion'
 
 import Image from 'next/image'
 
-// async function getdata(slug:string){
-//     const query = `*[_type == "products" && slug.current == "${slug}"][0] {
-//   _id,
-//     price,
-//     title,
-//     Description,
-//     "slug":slug.current,
-//     "categoryName": category->title,
-//     "ImageUrl":image.asset->url
-// }  `;
-//   const data = await client.fetch(query);
-//   return data
-// }
+
 
 export default  function ProductPage({params}:{
      params:{slug:string}
@@ -42,8 +30,8 @@ export default  function ProductPage({params}:{
   
 
   
-  console.log(random , random2 )
-  console.log(params.slug)
+  // console.log(random , random2 )
+  // console.log(params.slug)
   const [products,setproducts]=useState<any>([]);
   const [fproducts,setfproducts]=useState<any>([]);
   const query = `*[_type == "products" && slug.current == "${params.slug}"][0] {
@@ -77,7 +65,7 @@ export default  function ProductPage({params}:{
       }
       getData()
     },[])
-    console.log(fproducts)
+    // console.log(fproducts)
     let dispatch = useDispatch()
     const [isOpen, setIsOpen] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);

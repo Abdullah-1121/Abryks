@@ -1,11 +1,11 @@
 'use Client'
 import React from 'react'
 import {useSelector,useDispatch} from 'react-redux'
-import { addToCart , removeProduct , Addone , removeOne} from '@/redux/CartSlice'
+import { addToCart , removeProduct , Addone , removeOne , loadCart} from '@/redux/CartSlice'
 import Image from 'next/image'
 import CheckoutButton from './checkoutbtn'
 import {FaTrash , FaTimes} from 'react-icons/fa'
-
+import { useEffect } from 'react'
 import Link from 'next/link'
 const shoppingcart = () =>{
   const cart = useSelector((state:any) => state.cart);
@@ -14,11 +14,25 @@ const shoppingcart = () =>{
     const handleRemoveOne = (product:any) => { dispatch(removeOne(product)); }; 
     const handleRemoveFromCart = (product:any) => { dispatch(removeProduct(product)); };
      const handleaddtoCart = (product:any)=>{ dispatch(addToCart(product)); }
-    //  console.log('i am in cart')
-    //  console.log('cart' )
-    //  console.log(cart)
-    //  console.log('cartitem' )
-    //  console.log(cart.cartItems)
+     useEffect(() => {
+      if (typeof window !== 'undefined') {
+        const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '{}');
+        if (cartFromLocalStorage.cartItems) {
+          dispatch(loadCart(cartFromLocalStorage));
+        }
+      }
+    }, [dispatch]);
+  
+    // Save cart to local storage whenever cart items change
+    useEffect(() => {
+      if (typeof window !== 'undefined' && cart.cartItems.length > 0) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+    }, [cart]);
+   
+    //  const cartfromlocal : any= JSON.parse(localStorage.getItem("cart") || "[]")
+    //  console.log(cartfromlocal)
+    
       
      return (
       <div className='flex w-full min-h-screen  flex-col flex-grow'>
@@ -27,7 +41,7 @@ const shoppingcart = () =>{
           {cart.cartItems.length === 0 ? (
             <div className='flex  justify-center items-center w-full flex-col'>
               <p className='text-xl md:text-2xl  mb-2  '>No Items in the Cart</p>
-              <Link href='/'><button className='bg-black p-2 font-semibold border border-black text-white hover:bg-gray-600 rounded-lg shadow-xl '>Continue Shopping</button></Link>
+              <Link href='/shop'><button className='bg-black p-2 font-semibold border border-black text-white hover:bg-gray-600 rounded-lg shadow-xl '>Continue Shopping</button></Link>
             </div>
             
           ):(

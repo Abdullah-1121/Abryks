@@ -9,11 +9,11 @@ const stripe = new Stripe(process.env.NEXT_STRIPE_SECRET_KEY!)
 export  async function POST(req: NextRequest, res: NextApiResponse) {
   
     try {
-      console.log('Request received:', req.json);
+      // console.log('Request received:', req.json);
       
       const { items } = await req.json();
-      console.log('items are : ')
-      console.log(items)
+      // console.log('items are : ')
+      // console.log(items)
 
       // Check if items exist and are in the correct format
       if (!items || !Array.isArray(items)) {
@@ -49,7 +49,7 @@ export  async function POST(req: NextRequest, res: NextApiResponse) {
         cancel_url: `${req.nextUrl.origin}/?canceled=true`,
       });
       
-      console.log('Session created:', session);
+      // console.log('Session created:', session);
 
       return NextResponse.json({ sessionId: session.id }, { status: 200 });
     } catch (err:any) {
