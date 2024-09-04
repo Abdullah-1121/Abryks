@@ -163,8 +163,10 @@ const Shoppingcart = () =>{
                   {/* <button className='bg-white p-2 w-[80%] border-2 border-black rounded-lg shadow-xl hover:underline text-sm md:text-md'>Proceed to Checkout</button> */}
                  <CheckoutButton></CheckoutButton>
                 </div>
+                
                 <div className='flex  m-2 p-2 w-full md:w-[70%] justify-center items-center'>
-                  <button className='bg-white text-black p-2 w-[80%] border-2 border-black rounded-lg shadow-xl hover:underline text-sm md:text-md'>Continue Shopping</button>
+                  
+                  <button className='bg-white text-black p-2 w-[80%] border-2 border-black rounded-lg shadow-xl hover:underline text-sm md:text-md'><Link href='/shop'>Continue Shopping</Link></button>
                 </div>
               </div>
               </div>
