@@ -14,21 +14,21 @@ const Shoppingcart = () =>{
     const handleRemoveOne = (product:any) => { dispatch(removeOne(product)); }; 
     const handleRemoveFromCart = (product:any) => { dispatch(removeProduct(product)); };
      const handleaddtoCart = (product:any)=>{ dispatch(addToCart(product)); }
-     useEffect(() => {
-      if (typeof window !== 'undefined') {
-        const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '{}');
-        if (cartFromLocalStorage.cartItems) {
-          dispatch(loadCart(cartFromLocalStorage));
-        }
-      }
-    }, [dispatch]);
+    //  useEffect(() => {
+    //   if (typeof window !== 'undefined') {
+    //     const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartItems') || '{}');
+    //     if (cartFromLocalStorage.cartItems) {
+    //       dispatch(loadCart(cartFromLocalStorage));
+    //     }
+    //   }
+    // }, [dispatch]);
   
-    // Save cart to local storage whenever cart items change
-    useEffect(() => {
-      if (typeof window !== 'undefined' && cart.cartItems.length > 0) {
-        localStorage.setItem('cart', JSON.stringify(cart));
-      }
-    }, [cart]);
+    // // Save cart to local storage whenever cart items change
+    // useEffect(() => {
+    //   if (typeof window !== 'undefined' && cart.cartItems.length > 0) {
+    //     localStorage.setItem('cartItems', JSON.stringify(cart.cartItems));
+    //   }
+    // }, [cart.cartItems]);
    
     //  const cartfromlocal : any= JSON.parse(localStorage.getItem("cart") || "[]")
     //  console.log(cartfromlocal)
