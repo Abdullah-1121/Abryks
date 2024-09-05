@@ -15,7 +15,7 @@ const Cartsheet = () => {
   const handleRemoveFromCart = (product:any) => { dispatch(removeProduct(product)); };
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '{}');
+      const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartItems') || '{}');
       if (cartFromLocalStorage.cartItems) {
         dispatch(loadCart(cartFromLocalStorage));
       }
@@ -25,9 +25,9 @@ const Cartsheet = () => {
   // Save cart to local storage whenever cart items change
   useEffect(() => {
     if (typeof window !== 'undefined' && cart.cartItems.length > 0) {
-      localStorage.setItem('cart', JSON.stringify(cart));
+      localStorage.setItem('cartItems', JSON.stringify(cart.cartItems));
     }
-  }, [cart]);
+  }, [cart.cartItems]);
   
   
   return (
